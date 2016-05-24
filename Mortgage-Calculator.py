@@ -3,7 +3,9 @@
 # payments are to be made.
 # Written by David Liu
 
+
 def main():
+    
     #Define each variable as an illegal input to start the loop.
     payment_term = 0
     principal = 0
@@ -55,6 +57,7 @@ def main():
         total_monthly_payment += monthly_payment
         total_mortgage = total_monthly_payment + total_anniversary_payment
         months_saved = term_in_months - num_months
+        
     #Print outputs (different depending on if anniversary payments were selected).
     if anniversary_payment == 'y':        
         print("Total interest payments are: ${0:2,.2f}".format(total_interest_paid))
@@ -66,6 +69,7 @@ def main():
         print("Total interest payments are: ${0:2,.2f}".format(total_interest_paid))
         print("Total monthly payments are: ${0:2,.2f}".format(total_monthly_payment))
         print("Total cost of mortgage is: ${0:,.2f}".format(total_mortgage))
+        
 main()
 
 

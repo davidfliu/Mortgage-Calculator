@@ -18,6 +18,7 @@ def main():
         payment_term = int(input("Enter payment term in years: "))
     while annual_interest_rate < 1 or annual_interest_rate > 10:
         annual_interest_rate = float(input("Enter annual interest rate as %: "))
+
     anniversary_payment = input("Enter 'y' to make anniversary payments, 'n' otherwise: ")
     
     #Define variables used in mortgage calculator.
@@ -27,6 +28,7 @@ def main():
     print("Monthly payment is: ${0:,.2f}".format(monthly_payment))
         
     print("Month\tPrincipal")
+
     #Define running totals for interest paid, monthly payments, anniversary payments, and number of months.
     total_interest_paid = 0
     total_monthly_payment = 0
@@ -35,24 +37,28 @@ def main():
 
     #While loop to control entire calculations. 
     remaining_principal = principal
+
     while remaining_principal >= 0:
-        num_months = num_months + 1
+        num_months += 1
         monthly_interest_payment = monthly_interest_rate * remaining_principal
         paid_against_principal = monthly_payment - monthly_interest_payment
-        remaining_principal = remaining_principal - paid_against_principal
+        remaining_principal -= paid_against_principal
+
         if remaining_principal < 0:       
             print(num_months, "\t$0.00")
         else:
             print(num_months, "\t${0:,.2f}".format(remaining_principal))
+
         if anniversary_payment == 'y':
             if num_months % 12 == 0:
                 if 0.05 * remaining_principal < 5000:
                     paid_anniversary = 0.05 * remaining_principal
                 elif 0.05 * remaining_principal > 5000:
                     paid_anniversary = 5000
-                total_anniversary_payment= total_anniversary_payment + paid_anniversary
-                remaining_principal= remaining_principal - paid_anniversary
+                total_anniversary_payment += paid_anniversary
+                remaining_principal -= paid_anniversary
                 print("Anniversary payment made: ${0:,.2f}.".format(paid_anniversary), "Remaining principal is: ${0:,.2f}".format(remaining_principal))
+
         total_interest_paid += monthly_interest_payment
         total_monthly_payment += monthly_payment
         total_mortgage = total_monthly_payment + total_anniversary_payment
